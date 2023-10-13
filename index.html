@@ -27,15 +27,39 @@
         }
 
         function playRound(playerSelection, computerSelection) {
-            if (playerSelection === "ROCK"){
+            let selection = playerSelection.toUpperCase()
+            if (selection === "ROCK"){
                 if (computerSelection === "ROCK"){
                     return "Draw! What a rocky resolution";
                 }
                 else if (computerSelection === "PAPER"){
                     return "You Lose! Paper beats Rock";
                 }
-                else (computerSelection === "SCISSORS")
+                else{
                     return "You Win! Rock beats Scissors";
+                }
+            }  
+            else if (selection === "PAPER"){
+                if (computerSelection === "ROCK"){
+                    return "You Win! Paper beats Rock";
+                }
+                else if (computerSelection === "PAPER"){
+                    return "Draw! What a waste of Paper...";
+                }
+                else {
+                    return "You Lose! Scissors beat Paper";
+                }
+            }
+            else {
+                if (computerSelection === "ROCK"){
+                    return "You Lose! Rock beats Scissors"
+                }
+                else if (computerSelection === "PAPER"){
+                    return "You Win! Scissors beats Paper"
+                }
+                else {
+                    "Draw! 'snip snip' - Edward Scissorhands"
+                }
             }
 
         }
