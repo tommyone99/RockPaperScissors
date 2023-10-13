@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Rock Paper Scissors</title>
+</head>
+<body>
+    
+    <script>
+
+        console.log("hello world");
+
+        function getComputerChoice() {
+            let rngValue = Math.floor(((Math.random() * 2 + .05)/2) * 100);
+            let move = "";
+
+            if (rngValue <= 33) {
+                move = "Rock"
+            }
+            else if(rngValue <= 66 && rngValue > 33){
+                move = "Paper"
+            }
+            else {
+                move = "Scissors"
+            }
+
+            return move;
+        }
+
+        console.log(getComputerChoice())
+
+    </script>
+
+</body>
+</html>
