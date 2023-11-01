@@ -1,13 +1,41 @@
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
-const scissors = document.querySelector("scissors");
+const scissors = document.querySelector("#scissors");
 
-rock.addEventListener("click", playRound("ROCK", getComputerChoice));
-paper.addEventListener("click", playRound("PAPPER", getComputerChoice));
-scissors.addEventListener("click", playRound("SCISSORS", getComputerChoice));
+let playerScore = 0;
+let computerScore = 0;
+let roundResult = "";
+
+rock.addEventListener("click", getTally);
+paper.addEventListener("click", getTally);
+scissors.addEventListener("click", getTally);
 
 
-game();
+
+
+
+
+function getTally(e) {
+    roundResult = playRound(e);
+    if (roundResult === "WIN"){
+        playerScore++;
+    }
+    else if (roundResult === "LOSS"){
+        computerScore++;
+    }
+    console.log(`${roundResult} PLAYER SCORE: ${playerScore} COMPUTER SCORE: ${computerScore}`);
+
+    if (playerScore > 4){
+        console.log("You Win! Congratulations, you are better than a computer");
+        playerScore = 0;
+        computerScore = 0;
+    }
+    else if (computerScore > 4){
+        console.log("You Lose! Humanity was no match against Machine!");
+        playerScore = 0;
+        computerScore = 0;
+    };
+}
 
 function getComputerChoice() {
     let rngValue = Math.floor(((Math.random() * 2 + .05)/2) * 100);
@@ -26,8 +54,11 @@ function getComputerChoice() {
     return move;
 }
 
-function playRound(selection, computerSelection) {
+function playRound(e) {
 
+    selection = e.target.id.toUpperCase()
+    computerSelection = getComputerChoice();
+    
     if (selection === "ROCK"){
         if (computerSelection === "ROCK"){
             console.log("Draw! What a rocky resolution");
@@ -69,36 +100,5 @@ function playRound(selection, computerSelection) {
             console.log("Draw! 'snip snip' - Edward Scissorhands");
             return "DRAW";
         }
-    }
-}
-
-function game() {
-    playerScore = 0;
-    computerScore = 0;
-
-    for (let i = 0; i < 5; i++) {
-        playerInput = window.prompt("Rock, Paper, Scissors...");
-        const playerSelection = playerInput.toUpperCase();
-        const computerSelection = getComputerChoice();
-
-        if (playerSelection != "ROCK" && playerSelection != "PAPER" && playerSelection != "SCISSORS"){
-            console.log("Please Enter a Valid Selection");
-        }
-        else {
-            let roundResult = playRound(playerSelection, computerSelection);
-            if (roundResult === "WIN"){
-                playerScore++;
-            }
-            else if (roundResult === "LOSS"){
-                computerScore++;
-            }
-        }
-    }
-
-    if (playerScore > computerScore){
-        console.log("You Win! Congratulations, you are better than a computer");
-    }
-    else if (playerScore < computerScore){
-        console.log("You Lose! Humanity was no match against Machine!");
     }
 }
